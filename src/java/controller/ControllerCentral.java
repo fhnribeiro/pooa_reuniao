@@ -56,7 +56,7 @@ public class ControllerCentral extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("ac");
         
-        if(request.getSession().getAttribute("user")==null && !acao.equals("login")){
+        if(request.getSession().getAttribute("user")==null && acao!=null && !acao.equals("login")){
             acao="ShowLogin";
         }
         

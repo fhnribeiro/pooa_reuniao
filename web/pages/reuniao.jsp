@@ -17,12 +17,27 @@
                     <div class="form-group">
                         <label>Duração (min)</label>
                         <input type="number" class="form-control form-control-user" id="durationMeeting" name="duration"/>
+                    </div>                    
+                    <div class="form-group">
+                        <label>Pauta</label>
+                        <textarea class="form-control form-control-user" id="durationMeeting" name="agenda"></textarea>
                     </div>
                     <select name="room">
                         <c:forEach items="${requestScope.listRooms}" var="room">
-                            <option value="${room.getIdSala()}">${room.getDescricao()}</option>
+                            <option value="${room.getIdSala()}">${room.getDescricao()}  (${room.getCapacidade()} pessoas)</option>
                         </c:forEach>
                     </select>
+                    <div>
+                        <select id="selectFuncionario">
+                            <c:forEach items="${requestScope.listEmployees}" var="emp">
+                                <option value="${emp.getIdFuncionario()}">${emp.getNome()}</option>
+                            </c:forEach>
+                        </select>
+                        <input type="button" id="addEmployee" value="+">
+                    </div>
+                    <ul id="listEmployeesSelected">
+                        
+                    </ul>
                     <div>
                         <select id="selectEquipamento">
                             <c:forEach items="${requestScope.listEquipments}" var="eqt">

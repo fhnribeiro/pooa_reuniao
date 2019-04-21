@@ -42,14 +42,14 @@
 
           <!-- Nav Item - Dashboard -->
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="control?ac=ShowMeeting">
               <i class="fas fa-fw fa-tachometer-alt"></i>
               <span>Nova reunião</span></a>
           </li>
 
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="index.jsp">
               <i class="fas fa-fw fa-tachometer-alt"></i>
               <span>Listar reuniões</span></a>
           </li>

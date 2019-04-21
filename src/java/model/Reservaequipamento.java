@@ -50,6 +50,8 @@ public class Reservaequipamento implements Serializable {
     public Reservaequipamento(Integer idReservaEquipamento) {
         this.idReservaEquipamento = idReservaEquipamento;
     }
+    
+    
 
     public Integer getIdReservaEquipamento() {
         return idReservaEquipamento;

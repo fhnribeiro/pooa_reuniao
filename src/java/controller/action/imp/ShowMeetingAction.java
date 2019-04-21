@@ -6,6 +6,7 @@
 package controller.action.imp;
 
 import Dao.imp.EquipamentoDAO;
+import Dao.imp.FuncionarioDAO;
 import Dao.imp.SalaDAO;
 import controller.action.ICommandAction;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Equipamento;
+import model.Funcionario;
 import model.Sala;
 
 /**
@@ -31,6 +33,10 @@ public class ShowMeetingAction implements ICommandAction{
         List<Sala> salas = new SalaDAO().findAll();
         
         request.setAttribute("listRooms", salas);
+        
+        List<Funcionario> funcionarios = new FuncionarioDAO().findAll();
+        
+        request.setAttribute("listEmployees", funcionarios);
         
         RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=reuniao");
         

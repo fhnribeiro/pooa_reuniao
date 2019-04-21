@@ -48,8 +48,18 @@
   
   $("#addEquipment").click(function(){
     if( $("#listEquipamentSelected [value='"+$("#selectEquipamento option:selected").val()+"']").length==0){
-        $("#listEquipamentSelected").append($("<li/>").html("<span>"+$('#selectEquipamento option:selected').text()+"</span><input type='hidden' name='equipment' value='"+$('#selectEquipamento option:selected').val()+"'/>"))
+        $("#listEquipamentSelected").append($("<li/>").html("<span>"+$('#selectEquipamento option:selected').text()+"</span><input type='hidden' name='equipment' value='"+$('#selectEquipamento option:selected').val()+"'/><input type='button' value='-' class='removeEquipment floatRight'/><div class='clear'></div>"));
     }
+  });
+  
+   $("#addEmployee").click(function(){
+    if( $("#listEmployeesSelected [value='"+$("#selectFuncionario option:selected").val()+"']").length==0){
+        $("#listEmployeesSelected").append($("<li/>").html("<span>"+$('#selectFuncionario option:selected').text()+"</span><input type='hidden' name='employee' value='"+$('#selectFuncionario option:selected').val()+"'/><input type='button' value='-' class='removeEmployee floatRight'/><div class='clear'></div>"));
+    }
+  });
+  
+  $(document).on('click', '.removeEquipment,.removeEmployee', function(e) {
+      $(this).parents("li").remove();
   });
 
 })(jQuery); // End of use strict
