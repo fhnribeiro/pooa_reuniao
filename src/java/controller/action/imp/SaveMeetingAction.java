@@ -46,61 +46,73 @@ public class SaveMeetingAction implements ICommandAction{
         
         Sala sala = new SalaDAO().findById(Integer.parseInt(request.getParameter("room")));
         
-        String[] equipamentos = request.getParameterValues("equipment");
-        String[] participantes = request.getParameterValues("employee");
+        //Equipamento e = new EquipamentoDAO().findById(4);
+        
+        //Boolean livre = new EquipamentoReservaDAO().equipamentoLivre(e, dataInicio, dataFim);
+        
+        Boolean livre = new ReservaDAO().salaLivre(sala, dataInicio, dataFim);
+        
+        if(livre){
+        
+            String[] equipamentos = request.getParameterValues("equipment");
+            String[] participantes = request.getParameterValues("employee");
 
-        List<Participante> lstParticipantes = new ArrayList<Participante>();
-        
-        Funcionario logado = (Funcionario) request.getSession().getAttribute("user");
-        
-        Reserva r = new Reserva(dataInicio,dataFim,logado,sala);        
-        r = new ReservaDAO().inserir(r);
-        
-        Participante p = new Participante(r.getIdReserva(),logado.getIdFuncionario());
-        p.setReserva1(r);
-        p.setFuncionario1(logado);
-        
-        p = new ParticipanteDAO().inserir(p);
-        lstParticipantes.add(p);
-        
-        if(participantes!=null){
+            List<Participante> lstParticipantes = new ArrayList<Participante>();
+
+            Funcionario logado = (Funcionario) request.getSession().getAttribute("user");
             
-            for(int i=0;i<participantes.length;i++){
-                                
-                Participante p1 = new Participante(r.getIdReserva(),Integer.parseInt(participantes[i]));
-                
-                p1 = new ParticipanteDAO().inserir(p1);
+            Reserva r = new Reserva(dataInicio,dataFim,logado,sala);        
+            r.setPauta(request.getParameter("agenda"));
+            r = new ReservaDAO().inserir(r);
 
-                lstParticipantes.add(p1);
+            Participante p = new Participante(r.getIdReserva(),logado.getIdFuncionario());
+            p.setReserva1(r);
+            p.setFuncionario1(logado);
+
+            p = new ParticipanteDAO().inserir(p);
+            lstParticipantes.add(p);
+
+            if(participantes!=null){
+
+                for(int i=0;i<participantes.length;i++){
+
+                    Participante p1 = new Participante(r.getIdReserva(),Integer.parseInt(participantes[i]));
+
+                    p1 = new ParticipanteDAO().inserir(p1);
+
+                    lstParticipantes.add(p1);
+
+                }
+            }
+
+            r.setParticipanteList(lstParticipantes);
+
+            List<Reservaequipamento> listReservaEquipamento = new ArrayList<Reservaequipamento>();
+
+            if(equipamentos!=null){
+
+                for(int i=0;i<equipamentos.length;i++){
+
+                    Equipamento e = new EquipamentoDAO().findById(Integer.parseInt(equipamentos[i]));
+                    Reservaequipamento re = new Reservaequipamento(e,r);
+                    re = new EquipamentoReservaDAO().inserir(re);
+
+                    listReservaEquipamento.add(re);
+
+                }
 
             }
-        }
-        
-        r.setParticipanteList(lstParticipantes);
-        
-        List<Reservaequipamento> listReservaEquipamento = new ArrayList<Reservaequipamento>();
-        
-        if(equipamentos!=null){
-            
-            for(int i=0;i<equipamentos.length;i++){
-                
-                Equipamento e = new EquipamentoDAO().findById(Integer.parseInt(equipamentos[i]));
-                Reservaequipamento re = new Reservaequipamento(e,r);
-                re = new EquipamentoReservaDAO().inserir(re);
 
-                listReservaEquipamento.add(re);
-
-            }
+            r.setReservaequipamentoList(listReservaEquipamento);
             
+            response.sendRedirect("control?ac=ShowMeeting");
+            
+        }else{
+            
+            RequestDispatcher rd = request.getRequestDispatcher("control?ac=ShowMeeting");
+            request.setAttribute("msgError", "Este horário não está livre");
+            rd.forward(request, response);            
         }
-        
-        r.setReservaequipamentoList(listReservaEquipamento);
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("control?ac=ShowMeeting");
-        rd.forward(request, response);            
-        
-        
 
         
     }

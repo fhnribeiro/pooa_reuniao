@@ -7,6 +7,7 @@ package Dao.imp;
 
 import Dao.DaoGenerics;
 import controller.ControllerCentral;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,6 +71,32 @@ public class EquipamentoReservaDAO extends DaoGenerics<Reservaequipamento, Integ
             em.getTransaction().rollback();
             return null;
         }
+    }
+
+    public Boolean equipamentoLivre(Equipamento e, Date dataInicio, Date dataFim) {
+        TypedQuery<Reservaequipamento> q = em.createQuery("SELECT re FROM Equipamento e, Reservaequipamento re, Reserva r   "
+                + "WHERE re.equipamento=:equipamento AND re.reserva.idReserva = r.idReserva AND r.data>:dataInicio AND r.dataFim<:dataInicio", Reservaequipamento.class);
+
+        q.setParameter("equipamento", e);
+        q.setParameter("dataInicio", dataInicio);
+        
+        if(q.getResultList().size()==0){
+            return false;
+        }else{
+            q = em.createQuery("SELECT re FROM Equipamento e, Reservaequipamento re, Reserva r   "
+                + "WHERE re.equipamento=:equipamento AND re.reserva.idReserva = r.idReserva AND r.dataFim<:dataFim", Reservaequipamento.class);
+           
+
+            q.setParameter("equipamento", e);
+//            q.setParameter("dataInicio", dataInicio);
+            q.setParameter("dataFim", dataFim);
+            
+            if(q.getResultList().size()==0){
+                return false;
+            }
+        }
+        
+        return true;
     }
     
 }

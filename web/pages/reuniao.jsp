@@ -6,6 +6,14 @@
                 Reunião
             </div>
             <div class="card-body">
+                
+                <c:if test="${requestScope.msgError!=null}">
+                    <div class="card bg-danger text-white mb-3">
+                        <div class="card-body">
+                            ${requestScope.msgError}
+                        </div>
+                    </div>
+                </c:if>
                 <form>
                     <div class="form-group">
                         <input type="date" class="form-control form-control-user" id="dateMeeting" name="date" placeholder="Data da reunião"/>

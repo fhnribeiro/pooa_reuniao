@@ -28,8 +28,8 @@ public class FuncionarioDAO extends DaoGenerics<Funcionario, Integer>{
     @Override
     public Funcionario findById(Integer id) {
         
-        Query q = em.createQuery("SELECT a FROM Aluno a "
-                + " where a.idaluno = :id");
+        Query q = em.createQuery("SELECT a FROM funcionario a "
+                + " where a.idfuncionario= :id");
 
         q.setParameter("id", id);
         try {

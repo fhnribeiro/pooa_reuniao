@@ -6,11 +6,14 @@
 package controller;
 
 import controller.action.ICommandAction;
+import controller.action.imp.AdminMeetingAction;
+import controller.action.imp.DeleteMeetingAction;
 import controller.action.imp.HomeAction;
 import controller.action.imp.LoginAction;
 import controller.action.imp.SaveMeetingAction;
 import controller.action.imp.ShowLoginAction;
 import controller.action.imp.ShowMeetingAction;
+import controller.action.imp.ShowMeetingsAction;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -40,6 +43,10 @@ public class ControllerCentral extends HttpServlet {
         comandos.put("login", new LoginAction());
         comandos.put("ShowMeeting", new ShowMeetingAction());
         comandos.put("SaveMeeting", new SaveMeetingAction());
+        comandos.put("ShowMeetings", new ShowMeetingsAction());
+        comandos.put("AdminMeeting", new AdminMeetingAction());
+        comandos.put("CancelMeeting", new DeleteMeetingAction());        
+        comandos.put("AgreeMeeting", new ShowMeetingAction());
     }
 
     /**
@@ -58,8 +65,7 @@ public class ControllerCentral extends HttpServlet {
         
         if(request.getSession().getAttribute("user")==null && acao!=null && !acao.equals("login")){
             acao="ShowLogin";
-        }
-        
+        }       
         
         try {            
             comandos.get(acao).execute(request, response);            

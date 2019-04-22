@@ -15,7 +15,7 @@
       <!-- Custom fonts for this template-->
       <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
       <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+      <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
       <!-- Custom styles for this template-->
       <link href="css/sb-admin-2.css" rel="stylesheet">
 
@@ -49,7 +49,7 @@
 
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
-            <a class="nav-link" href="index.jsp">
+            <a class="nav-link" href="control?ac=ShowMeetings">
               <i class="fas fa-fw fa-tachometer-alt"></i>
               <span>Listar reuniões</span></a>
           </li>
@@ -282,7 +282,10 @@
       <!-- Bootstrap core JavaScript-->
       <script src="js/jquery.min.js"></script>
       <script src="js/bootstrap.bundle.min.js"></script>
-
+      <script src="js/jquery.dataTables.min.js"></script>
+      <script src="js/dataTables.bootstrap4.js"></script>
+      
+      
       <!-- Core plugin JavaScript-->
       <script src="js/jquery.easing.min.js"></script>
 

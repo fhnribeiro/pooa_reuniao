@@ -61,5 +61,7 @@
   $(document).on('click', '.removeEquipment,.removeEmployee', function(e) {
       $(this).parents("li").remove();
   });
+  
+   $("table").DataTable();;
 
 })(jQuery); // End of use strict
