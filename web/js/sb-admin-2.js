@@ -72,7 +72,11 @@
   
    $("#addEmployee").click(function(){
     if( $("#listEmployeesSelected [value='"+$("#selectFuncionario option:selected").val()+"']").length==0){
-        $("#listEmployeesSelected").append($("<li/>").html("<span>"+$('#selectFuncionario option:selected').text()+"</span><input type='hidden' name='employee' value='"+$('#selectFuncionario option:selected').val()+"'/><input type='button' value='-' class='removeEmployee floatRight'/><div class='clear'></div>"));
+        if($('[name="room"] option:selected').attr("capacity")>$("#listEmployeesSelected li").length+1){
+            $("#listEmployeesSelected").append($("<li/>").html("<span>"+$('#selectFuncionario option:selected').text()+"</span><input type='hidden' name='employee' value='"+$('#selectFuncionario option:selected').val()+"'/><input type='button' value='-' class='removeEmployee floatRight'/><div class='clear'></div>"));
+        }else{
+            alert("Esta sala não suporta mais participantes, escolha outra sala");
+        }
     }
   });
   
@@ -95,5 +99,9 @@
         });
       //$(this).parents("form").submit();
    });
+   
+   
+   $('.time').mask('00:00');
+   $('#durationMeeting').mask('099');
 
 })(jQuery); // End of use strict

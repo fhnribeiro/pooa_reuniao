@@ -36,12 +36,8 @@ public class CheckDeviceFreeAction implements ICommandAction{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         Funcionario f = (Funcionario) request.getSession().getAttribute("user");
-        
-        System.out.println(Integer.parseInt(request.getParameter("id")));
-        
+                
         Equipamento e = new EquipamentoDAO().findById(Integer.parseInt(request.getParameter("id")));
-        
-        System.out.println(e.getDescricao());
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         

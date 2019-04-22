@@ -94,8 +94,6 @@ public class EquipamentoReservaDAO extends DaoGenerics<Reservaequipamento, Integ
             q.setParameter("dataInicio", dataInicio);
             q.setParameter("dataFim", dataFim);
             
-            System.out.println("Entrou 2: "+q.getResultList().size());
-            
             if(q.getResultList().size()>0){
                 return false;
             }

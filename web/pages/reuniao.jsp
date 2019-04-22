@@ -20,11 +20,11 @@
                     </div>
                     <div class="form-group">
                         <label>Hora da reunião</label>
-                        <input type="text" class="form-control form-control-user" id="timeMeeting" name="time"/>
+                        <input type="text" class="form-control form-control-user time" id="timeMeeting" name="time"/>
                     </div>
                     <div class="form-group">
                         <label>Duração (min)</label>
-                        <input type="number" class="form-control form-control-user" id="durationMeeting" name="duration"/>
+                        <input type="number" class="form-control form-control-user time" id="durationMeeting" name="duration"/>
                     </div>                    
                     <div class="form-group">
                         <label>Pauta</label>
@@ -32,7 +32,7 @@
                     </div>
                     <select name="room">
                         <c:forEach items="${requestScope.listRooms}" var="room">
-                            <option value="${room.getIdSala()}">${room.getDescricao()}  (${room.getCapacidade()} pessoas)</option>
+                            <option value="${room.getIdSala()}" capacity="${room.getCapacidade()}">${room.getDescricao()}  (${room.getCapacidade()} pessoas)</option>
                         </c:forEach>
                     </select>
                     <div>
