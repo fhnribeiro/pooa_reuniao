@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")
     , @NamedQuery(name = "Reserva.findByIdReserva", query = "SELECT r FROM Reserva r WHERE r.idReserva = :idReserva")
     , @NamedQuery(name = "Reserva.findByData", query = "SELECT r FROM Reserva r WHERE r.data = :data")
-    , @NamedQuery(name = "Reserva.findByDataFim", query = "SELECT r FROM Reserva r WHERE r.dataFim = :dataFim")})
+    , @NamedQuery(name = "Reserva.findByDataFim", query = "SELECT r FROM Reserva r WHERE r.dataFim = :dataFim")
+    , @NamedQuery(name = "Reserva.findByStatus", query = "SELECT r FROM Reserva r WHERE r.status = :status")})
 public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +62,7 @@ public class Reserva implements Serializable {
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
+    private Integer status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reserva")
     private List<Reservaequipamento> reservaequipamentoList;
     @JoinColumn(name = "Funcionario", referencedColumnName = "idFuncionario", nullable = false)
@@ -84,7 +86,7 @@ public class Reserva implements Serializable {
         this.data = data;
         this.dataFim = dataFim;
     }
-
+    
     public Reserva(Date data, Date dataFim, Funcionario logado, Sala sala) {
         this.data = data;
         this.dataFim = dataFim;
@@ -132,6 +134,15 @@ public class Reserva implements Serializable {
         this.dataFim = dataFim;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    
     @XmlTransient
     public List<Reservaequipamento> getReservaequipamentoList() {
         return reservaequipamentoList;

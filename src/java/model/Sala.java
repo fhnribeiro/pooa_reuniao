@@ -62,6 +62,7 @@ public class Sala implements Serializable {
         this.descricao = descricao;
         this.capacidade = capacidade;
     }
+    
 
     public Integer getIdSala() {
         return idSala;

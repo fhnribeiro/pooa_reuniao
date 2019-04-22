@@ -50,19 +50,15 @@ public class Reservaequipamento implements Serializable {
     public Reservaequipamento(Integer idReservaEquipamento) {
         this.idReservaEquipamento = idReservaEquipamento;
     }
-    
-    
+
+    public Reservaequipamento(Equipamento e, Reserva r) {
+        this.equipamento=e;
+        this.reserva=r;
+    }
 
     public Integer getIdReservaEquipamento() {
         return idReservaEquipamento;
     }
-
-    public Reservaequipamento(Equipamento equipamento, Reserva reserva) {
-        this.equipamento = equipamento;
-        this.reserva = reserva;
-    }
-    
-    
 
     public void setIdReservaEquipamento(Integer idReservaEquipamento) {
         this.idReservaEquipamento = idReservaEquipamento;

@@ -7,13 +7,17 @@ package controller;
 
 import controller.action.ICommandAction;
 import controller.action.imp.AdminMeetingAction;
+import controller.action.imp.AgreeMeetingAction;
+import controller.action.imp.CheckDeviceFreeAction;
 import controller.action.imp.DeleteMeetingAction;
 import controller.action.imp.HomeAction;
 import controller.action.imp.LoginAction;
 import controller.action.imp.SaveMeetingAction;
+import controller.action.imp.ShowDetailMeetingAction;
 import controller.action.imp.ShowLoginAction;
 import controller.action.imp.ShowMeetingAction;
 import controller.action.imp.ShowMeetingsAction;
+import controller.action.imp.UpdateMeetingAction;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -45,8 +49,11 @@ public class ControllerCentral extends HttpServlet {
         comandos.put("SaveMeeting", new SaveMeetingAction());
         comandos.put("ShowMeetings", new ShowMeetingsAction());
         comandos.put("AdminMeeting", new AdminMeetingAction());
+        comandos.put("UpdateMeeting", new UpdateMeetingAction());
         comandos.put("CancelMeeting", new DeleteMeetingAction());        
-        comandos.put("AgreeMeeting", new ShowMeetingAction());
+        comandos.put("DetailMeeting", new ShowDetailMeetingAction());
+        comandos.put("AgreeMeeting", new AgreeMeetingAction());
+        comandos.put("CheckDeviceFree", new CheckDeviceFreeAction());
     }
 
     /**

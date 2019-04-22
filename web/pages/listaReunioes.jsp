@@ -27,7 +27,7 @@
                             <th>
                                 Sala
                             </th>
-                            <th width="1%"></th>
+                            <th width="1%">Status</th>
                             <th width="1%"></th>
                         </tr>
                     </thead>
@@ -37,8 +37,15 @@
                                 <td><fmt:formatDate type = "both" value = "${met.getData()}"/></td>
                                 <td><fmt:formatDate type = "both" value = "${met.getDataFim()}"/></td>
                                 <td>${met.getSala().getDescricao()}</td>
-                                <td class="text-right"><a href="control?ac=AdminMeeting&id=${met.getIdReserva()}" class="btn btn-primary btn-user">Realizada</a></td>
-                                <td class="text-right"><a href="control?ac=CancelMeeting&id=${met.getIdReserva()}" class="btn btn-primary btn-user">Cancelar</a></td>
+                                <c:if test="${met.getStatus()==1}">
+                                    <td class="text-right"><a href="control?ac=AdminMeeting&id=${met.getIdReserva()}" class="btn btn-primary btn-user">Finalizar</a></td>
+                                    <td class="text-right"><a href="control?ac=CancelMeeting&id=${met.getIdReserva()}" class="btn btn-primary btn-user">Cancelar</a></td>
+                                </c:if>
+                                <c:if test="${met.getStatus()!=1}">
+                                    <td><a href="control?ac=DetailMeeting&id=${met.getIdReserva()}" class="btn btn-primary btn-user">Visualizar</a></td>
+                                    <td class="text-right">Realizada</td>                                    
+                                </c:if>
+                                
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -65,6 +72,7 @@
                           <th>
                               Sala
                           </th>
+                          <th width="1%"></th>
                       </tr>
                   </thead>
                   <tbody>
@@ -73,6 +81,7 @@
                               <td><fmt:formatDate type = "both" value = "${met.getData()}"/></td>
                               <td><fmt:formatDate type = "both" value = "${met.getDataFim()}"/></td>
                               <td>${met.getSala().getDescricao()}</td>
+                              <td class="text-right"><a href="control?ac=DetailMeeting&id=${met.getIdReserva()}" class="btn btn-primary btn-user">Visualizar</a></td>
                           </tr>
                       </c:forEach>
                   </tbody>

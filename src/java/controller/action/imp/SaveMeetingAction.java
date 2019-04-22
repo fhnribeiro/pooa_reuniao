@@ -63,7 +63,9 @@ public class SaveMeetingAction implements ICommandAction{
             
             Reserva r = new Reserva(dataInicio,dataFim,logado,sala);        
             r.setPauta(request.getParameter("agenda"));
+            r.setStatus(1);
             r = new ReservaDAO().inserir(r);
+            
 
             Participante p = new Participante(r.getIdReserva(),logado.getIdFuncionario());
             p.setReserva1(r);

@@ -140,5 +140,16 @@ public class ReservaDAO extends DaoGenerics<Reserva, Integer>{
             em.getTransaction().rollback();
         }
     }
+
+    public void atualiza(Reserva reserva) {
+        try {
+            em.getTransaction().begin();
+            em.merge(reserva);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            Logger.getLogger(ReservaDAO.class.getName()).log(Level.SEVERE, null, e);
+            em.getTransaction().rollback();
+        }
+    }
     
 }

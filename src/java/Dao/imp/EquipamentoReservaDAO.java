@@ -74,24 +74,29 @@ public class EquipamentoReservaDAO extends DaoGenerics<Reservaequipamento, Integ
     }
 
     public Boolean equipamentoLivre(Equipamento e, Date dataInicio, Date dataFim) {
-        TypedQuery<Reservaequipamento> q = em.createQuery("SELECT re FROM Equipamento e, Reservaequipamento re, Reserva r   "
-                + "WHERE re.equipamento=:equipamento AND re.reserva.idReserva = r.idReserva AND r.data>:dataInicio AND r.dataFim<:dataInicio", Reservaequipamento.class);
+        TypedQuery<Reservaequipamento> q = em.createQuery("SELECT re FROM Reservaequipamento re, Reserva r   "
+                + "WHERE re.equipamento=:equipamento AND re.reserva.idReserva = r.idReserva AND r.data>=:dataInicio AND r.data<=:dataFim", Reservaequipamento.class);
 
         q.setParameter("equipamento", e);
         q.setParameter("dataInicio", dataInicio);
-        
-        if(q.getResultList().size()==0){
+        q.setParameter("dataFim", dataFim);
+            
+        if(q.getResultList().size()>0){
+            
             return false;
+            
         }else{
-            q = em.createQuery("SELECT re FROM Equipamento e, Reservaequipamento re, Reserva r   "
-                + "WHERE re.equipamento=:equipamento AND re.reserva.idReserva = r.idReserva AND r.dataFim<:dataFim", Reservaequipamento.class);
+            q = em.createQuery("SELECT re FROM Reservaequipamento re, Reserva r   "
+                + "WHERE re.equipamento=:equipamento AND re.reserva.idReserva = r.idReserva  AND r.dataFim>=:dataInicio AND r.dataFim<=:dataFim", Reservaequipamento.class);
            
 
             q.setParameter("equipamento", e);
-//            q.setParameter("dataInicio", dataInicio);
+            q.setParameter("dataInicio", dataInicio);
             q.setParameter("dataFim", dataFim);
             
-            if(q.getResultList().size()==0){
+            System.out.println("Entrou 2: "+q.getResultList().size());
+            
+            if(q.getResultList().size()>0){
                 return false;
             }
         }

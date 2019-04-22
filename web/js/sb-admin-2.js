@@ -48,7 +48,25 @@
   
   $("#addEquipment").click(function(){
     if( $("#listEquipamentSelected [value='"+$("#selectEquipamento option:selected").val()+"']").length==0){
-        $("#listEquipamentSelected").append($("<li/>").html("<span>"+$('#selectEquipamento option:selected').text()+"</span><input type='hidden' name='equipment' value='"+$('#selectEquipamento option:selected').val()+"'/><input type='button' value='-' class='removeEquipment floatRight'/><div class='clear'></div>"));
+         
+        var params={
+            "ac":"CheckDeviceFree",
+            "id":$("#selectEquipamento").val(),
+            "date":$("#dateMeeting").val(),
+            "duration":$("#durationMeeting").val(),
+            "time":$("#timeMeeting").val()
+        }
+        
+        $.post("control",params,function(data){
+            if(data==1){
+                $("#listEquipamentSelected").append($("<li/>").html("<span>"+$('#selectEquipamento option:selected').text()+"</span><input type='hidden' name='equipment' value='"+$('#selectEquipamento option:selected').val()+"'/><input type='button' value='-' class='removeEquipment floatRight'/><div class='clear'></div>"));
+            }else if(data==2){
+                alert("Este equipamento já está reservado nesse horário");
+            }else{
+                alert("Ocorreu um erro ao adicionar esse equipamento");
+            }
+        });
+        
     }
   });
   
@@ -62,6 +80,20 @@
       $(this).parents("li").remove();
   });
   
-   $("table").DataTable();;
+   $("table").DataTable();
+   
+   $("#formAgreeMinute input:checkbox").change(function(){
+       $.post("control",$("#formAgreeMinute").serialize(),function(data){
+           if(data!="OK"){
+               if($("#formAgreeMinute input:checkbox").is(":checked")){
+                   $("#formAgreeMinute input:checkbox").removeAttr("checked");
+               }else{
+                   $("#formAgreeMinute input:checkbox").attr("checked","checked");
+               }
+               
+           }
+        });
+      //$(this).parents("form").submit();
+   });
 
 })(jQuery); // End of use strict

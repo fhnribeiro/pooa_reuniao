@@ -32,7 +32,7 @@ public class Participante implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ParticipantePK participantePK;
-    private Short aceitouAta;
+    private Integer aceitouAta;
     @JoinColumn(name = "Funcionario", referencedColumnName = "idFuncionario", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Funcionario funcionario1;
@@ -59,13 +59,15 @@ public class Participante implements Serializable {
         this.participantePK = participantePK;
     }
 
-    public Short getAceitouAta() {
+    public Integer getAceitouAta() {
         return aceitouAta;
     }
 
-    public void setAceitouAta(Short aceitouAta) {
+    public void setAceitouAta(Integer aceitouAta) {
         this.aceitouAta = aceitouAta;
     }
+
+    
 
     public Funcionario getFuncionario1() {
         return funcionario1;
