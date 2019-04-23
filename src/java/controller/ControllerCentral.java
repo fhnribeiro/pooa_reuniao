@@ -12,6 +12,7 @@ import controller.action.imp.CheckDeviceFreeAction;
 import controller.action.imp.DeleteMeetingAction;
 import controller.action.imp.HomeAction;
 import controller.action.imp.LoginAction;
+import controller.action.imp.LogoutAction;
 import controller.action.imp.SaveMeetingAction;
 import controller.action.imp.ShowDetailMeetingAction;
 import controller.action.imp.ShowLoginAction;
@@ -54,6 +55,7 @@ public class ControllerCentral extends HttpServlet {
         comandos.put("DetailMeeting", new ShowDetailMeetingAction());
         comandos.put("AgreeMeeting", new AgreeMeetingAction());
         comandos.put("CheckDeviceFree", new CheckDeviceFreeAction());
+        comandos.put("Logout", new LogoutAction());
     }
 
     /**
@@ -70,7 +72,7 @@ public class ControllerCentral extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("ac");
         
-        if(request.getSession().getAttribute("user")==null && acao!=null && !acao.equals("login")){
+        if((request.getSession().getAttribute("user")==null && acao==null) || (request.getSession().getAttribute("user")==null && acao!=null && !acao.equals("login"))){
             acao="ShowLogin";
         }       
         

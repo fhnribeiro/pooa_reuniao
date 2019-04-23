@@ -16,15 +16,15 @@
                 </c:if>
                 <form>
                     <div class="form-group">
-                        <input type="date" class="form-control form-control-user" id="dateMeeting" name="date" placeholder="Data da reunião"/>
+                        <input type="date" required class="form-control form-control-user" id="dateMeeting" name="date" placeholder="Data da reunião"/>
                     </div>
                     <div class="form-group">
                         <label>Hora da reunião</label>
-                        <input type="text" class="form-control form-control-user time" id="timeMeeting" name="time"/>
+                        <input type="text" required class="form-control form-control-user time" id="timeMeeting" name="time"/>
                     </div>
                     <div class="form-group">
                         <label>Duração (min)</label>
-                        <input type="number" class="form-control form-control-user time" id="durationMeeting" name="duration"/>
+                        <input type="number" required class="form-control form-control-user time" id="durationMeeting" name="duration"/>
                     </div>                    
                     <div class="form-group">
                         <label>Pauta</label>
@@ -38,8 +38,10 @@
                     <div>
                         <select id="selectFuncionario">
                             <c:forEach items="${requestScope.listEmployees}" var="emp">
-                                <option value="${emp.getIdFuncionario()}">${emp.getNome()}</option>
-                            </c:forEach>
+                                <c:if test="${sessionScope.user.getIdFuncionario()!= emp.getIdFuncionario() }">
+                                    <option value="${emp.getIdFuncionario()}">${emp.getNome()}</option>
+                                </c:if>
+                            </c:forEach>                                    
                         </select>
                         <input type="button" id="addEmployee" value="+">
                     </div>

@@ -127,6 +127,17 @@ public class ReservaDAO extends DaoGenerics<Reserva, Integer>{
         return q.getResultList();
         
     }
+    
+    public List<Reserva> reunioesDemais(Funcionario f){
+
+         TypedQuery<Reserva> q = em.createQuery("SELECT r FROM Reserva r, Participante p "
+                + "WHERE r=p.reserva1 AND p.funcionario1<>:funcionario AND r.funcionario<>:funcionario", Reserva.class);
+
+        q.setParameter("funcionario", f);
+        
+        return q.getResultList();
+        
+    }
 
     public void deleta(Reserva reserva) {
         

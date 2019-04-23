@@ -34,9 +34,12 @@ public class ShowMeetingsAction implements ICommandAction{
         List<Reserva> minhasReunioes = new ReservaDAO().minhasReunioes(f);
         
         List<Reserva> reunioesParticipo = new ReservaDAO().reunioesQueParticipo(f);
+        
+        List<Reserva> reunioesDemais = new ReservaDAO().reunioesDemais(f);
       
         request.setAttribute("listMyMeetings", minhasReunioes);
         request.setAttribute("listMeetingsIam", reunioesParticipo);
+        request.setAttribute("listMeetings", reunioesDemais);
 
         RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=listaReunioes");
 

@@ -49,24 +49,30 @@
   $("#addEquipment").click(function(){
     if( $("#listEquipamentSelected [value='"+$("#selectEquipamento option:selected").val()+"']").length==0){
          
-        var params={
-            "ac":"CheckDeviceFree",
-            "id":$("#selectEquipamento").val(),
-            "date":$("#dateMeeting").val(),
-            "duration":$("#durationMeeting").val(),
-            "time":$("#timeMeeting").val()
-        }
+         if($("#dateMeeting").val()!="" && $("#durationMeeting").val() != "" && $("#timeMeeting").val() != ""){
+         
+                        var params={
+                            "ac":"CheckDeviceFree",
+                            "id":$("#selectEquipamento").val(),
+                            "date":$("#dateMeeting").val(),
+                            "duration":$("#durationMeeting").val(),
+                            "time":$("#timeMeeting").val()
+                        }
+
+                        $.post("control",params,function(data){
+                            if(data==1){
+                                $("#listEquipamentSelected").append($("<li/>").html("<span>"+$('#selectEquipamento option:selected').text()+"</span><input type='hidden' name='equipment' value='"+$('#selectEquipamento option:selected').val()+"'/><input type='button' value='-' class='removeEquipment floatRight'/><div class='clear'></div>"));
+                            }else if(data==2){
+                                alert("Este equipamento já está reservado nesse horário");
+                            }else{
+                                alert("Ocorreu um erro ao adicionar esse equipamento");
+                            }
+                        });
         
-        $.post("control",params,function(data){
-            if(data==1){
-                $("#listEquipamentSelected").append($("<li/>").html("<span>"+$('#selectEquipamento option:selected').text()+"</span><input type='hidden' name='equipment' value='"+$('#selectEquipamento option:selected').val()+"'/><input type='button' value='-' class='removeEquipment floatRight'/><div class='clear'></div>"));
-            }else if(data==2){
-                alert("Este equipamento já está reservado nesse horário");
-            }else{
-                alert("Ocorreu um erro ao adicionar esse equipamento");
-            }
-        });
-        
+                }else{
+                    alert("Preenche os campos obrigatórios");
+                }
+                
     }
   });
   
