@@ -18,6 +18,8 @@ import controller.action.imp.ShowDetailMeetingAction;
 import controller.action.imp.ShowLoginAction;
 import controller.action.imp.ShowMeetingAction;
 import controller.action.imp.ShowMeetingsAction;
+import controller.action.imp.ShowRoomAction;
+import controller.action.imp.SaveRoomAction;
 import controller.action.imp.UpdateMeetingAction;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,6 +58,8 @@ public class ControllerCentral extends HttpServlet {
         comandos.put("AgreeMeeting", new AgreeMeetingAction());
         comandos.put("CheckDeviceFree", new CheckDeviceFreeAction());
         comandos.put("Logout", new LogoutAction());
+        comandos.put("ShowRoom", new ShowRoomAction());
+        comandos.put("SaveRoom", new SaveRoomAction());
     }
 
     /**

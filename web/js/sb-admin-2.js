@@ -109,5 +109,22 @@
    
    $('.time').mask('00:00');
    $('#durationMeeting').mask('099');
+   
+   $("#formMeeting #dateMeeting,#formMeeting #timeMeeting").change(function(){
+        $("#formMeeting .card.bg-danger").hide();      
+   });
+   
+   $("#formMeeting").submit(function(e){
+       e.preventDefault();
+       $.post("control",$(this).serialize(),function(data){
+            if(data==1){
+                location.replace("control?ac=ShowMeetings");
+            }else if(data==2){
+                $("#formMeeting .card.bg-danger").show();
+            }else{
+                alert("Ocorreu um erro");
+            }
+        });
+   });
 
 })(jQuery); // End of use strict

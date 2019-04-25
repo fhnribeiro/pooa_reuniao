@@ -130,8 +130,8 @@ public class ReservaDAO extends DaoGenerics<Reserva, Integer>{
     
     public List<Reserva> reunioesDemais(Funcionario f){
 
-         TypedQuery<Reserva> q = em.createQuery("SELECT r FROM Reserva r, Participante p "
-                + "WHERE r=p.reserva1 AND p.funcionario1<>:funcionario AND r.funcionario<>:funcionario", Reserva.class);
+         TypedQuery<Reserva> q = em.createQuery("SELECT r FROM Reserva r "
+                + "WHERE NOT EXISTS(SELECT p FROM Participante p WHERE p.funcionario1=:funcionario AND r=p.reserva1)", Reserva.class);
 
         q.setParameter("funcionario", f);
         

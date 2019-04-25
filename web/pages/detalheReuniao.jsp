@@ -36,7 +36,9 @@
                     <label>Pauta</label>
                     <div>${requestScope.reserva.getPauta()}</div>
                 </div>
-                
+                <c:if test="${requestScope.reserva.getStatus()==1}">
+                    <div>Está reunião não foi finalizada ainda</div>
+                </c:if>
                 <c:if test="${requestScope.reserva.getStatus()==2}">
                     <div>
                         <label>Ata</label>

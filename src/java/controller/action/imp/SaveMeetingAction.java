@@ -12,6 +12,7 @@ import Dao.imp.ParticipanteDAO;
 import Dao.imp.ReservaDAO;
 import Dao.imp.SalaDAO;
 import controller.action.ICommandAction;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +52,10 @@ public class SaveMeetingAction implements ICommandAction{
         //Boolean livre = new EquipamentoReservaDAO().equipamentoLivre(e, dataInicio, dataFim);
         
         Boolean livre = new ReservaDAO().salaLivre(sala, dataInicio, dataFim);
+        
+        response.setContentType("text/plain; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
         
         if(livre){
         
@@ -107,13 +112,12 @@ public class SaveMeetingAction implements ICommandAction{
 
             r.setReservaequipamentoList(listReservaEquipamento);
             
-            response.sendRedirect("control?ac=ShowMeeting");
+            out.println("1");
             
         }else{
             
-            RequestDispatcher rd = request.getRequestDispatcher("control?ac=ShowMeeting");
-            request.setAttribute("msgError", "Este horário não está livre");
-            rd.forward(request, response);            
+            out.println("2");
+            
         }
 
         

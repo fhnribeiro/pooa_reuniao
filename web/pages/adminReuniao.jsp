@@ -11,9 +11,9 @@
                         <h6>Ata</h6>
                         <textarea name="Minute" class="form-control form-control-user"></textarea>
                     </div>
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <input type="checkbox" name="finished" id="finished" value="2"/><label for="finished" >Realizada</label>
-                    </div>
+                    </div>-->
                     <input type="hidden" name="id" value="${requestScope.reserva.getIdReserva()}"/>
                     <input type="hidden" name="ac" value="UpdateMeeting"/>
                     <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block"/>
